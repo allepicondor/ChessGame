@@ -24,10 +24,15 @@ class Board:
         if AtackeCord in Attacker.possibleMoves:
             return True
         return False
+
+
+
     def reset_Board(self):#Starting Piece Position
-        for x in range(self.BoardSize):
-            self.board[x][1] = Pieces.Pawn(x,1,"black",self)
-            self.board[x][6] = Pieces.Pawn(x,6,"white",self)
+        self.board[3][6] = Pieces.Rook(3,6,"white",self)
+        
+
+
+
     def DrawPossibleMoves(self,win,selectedPiece):
         if selectedPiece != []:
             print()
