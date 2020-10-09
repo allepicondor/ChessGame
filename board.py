@@ -28,8 +28,9 @@ class Board:
 
 
     def reset_Board(self):#Starting Piece Position
-        self.board[3][6] = Pieces.Rook(3,6,"white",self)
-        
+        self.board[3][6] = Pieces.Pawn(3,6,"white",self)
+        self.board[5][6] = Pieces.Pawn(5,6,"black",self)
+
 
 
 

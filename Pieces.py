@@ -11,9 +11,7 @@ class Pawn:
         self.FirstMove = True#ONLY FOR PAWNSSSSSS
         
         if side == 'white':
-            self.Image = pygame.image.load('PiecesImg/Black/pawn.png')
-        else:
-            self.color = [0,0,0]
+            self.Image = pygame.image.load('PiecesImg/White/pawn.png')
         self.Image = pygame.transform.scale(self.Image,(int(self.board.segment),int(self.board.segment)))
     def draw(self,win):
         pos = self.board.GrabPixel([self.x,self.y])
