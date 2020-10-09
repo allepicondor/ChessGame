@@ -13,32 +13,29 @@ class Board:
         x = int(pos[0] * self.segment)
         y = int(pos[1] * self.segment)
         return [x,y]
-    def GrabPos(self,pos):# pos != 659 pos == [659,800]
-        x = int(pos[0] * .01)
-        y = int(pos[1] * .01)
+    def GrabPos(self,pos):# pos != 175 pos == [659,800]
+        x = int(pos[0] / self.segment)
+        y = int(pos[1] / self.segment)
         return [x,y]
-    def checkIfPossibleMove(self,AttackerCord,AtackeCord):
+    def move_Check(self,AttackerCord,AtackeCord):
         Attacker = self.board[AttackerCord[0]][AttackerCord[1]]
+        Attacker.PossibleMoves(self)
         if AtackeCord in Attacker.possibleMoves:
             return True
         return False
     def reset_Board(self):
         self.board[4][7] = Pieces.Rook(4,7,[150,150,150],"white",self)
         self.board[4][2] = Pieces.Pawn(4,2,[0,0,0],"black",self)
-    def EveryFrame(self):
-        for x in range(8):
-            for y in range(8):
-                if self.board[x][y] != None:
-                    self.board[x][y].PossibleMoves(self)
+    def DrawPossibleMoves(self,win,selectedPiece):
+        if selectedPiece != []:
+            print()
+            self.board[selectedPiece[0]][selectedPiece[1]].drawPossibleMoves(win)
+
     def drawPieces(self,win):
         for x in range(8):
             for y in range(8):
                 if self.board[x][y] != None:
                     self.board[x][y].draw(win)
-        for x in range(8):
-            for y in range(8):
-                if self.board[x][y] != None:
-                    self.board[x][y].drawPossibleMoves(win)
     def DrawBoard(self,win):
         for x in range(8):
             for y in range(8):
