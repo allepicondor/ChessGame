@@ -2,9 +2,10 @@ import numpy as np
 import pygame
 import Pieces
 from board import Board
+WIN_SIZE = 600
 
-board = Board(600)
-win = pygame.display.set_mode((600,600))
+board = Board(WIN_SIZE,10)
+win = pygame.display.set_mode((WIN_SIZE,WIN_SIZE))
 clock = pygame.time.Clock()
 board.reset_Board()
 print(board.board)
