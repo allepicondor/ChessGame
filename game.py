@@ -28,25 +28,30 @@ while True:
             else:
                 selectedPosition = []
         else:
+            MousePos = board.GrabPos(pygame.mouse.get_pos())
+            if board.board[MousePos[0]][MousePos[1]] != None:
+                if board.board[MousePos[0]][MousePos[1]].side == currentSide:
+                    selectedPosition = board.GrabPos(pygame.mouse.get_pos())
+                    print("selected ", selectedPosition)
             if board.move_Check(selectedPosition,board.GrabPos(pygame.mouse.get_pos())):
-                new = board.GrabPos(pygame.mouse.get_pos())
+                    new = board.GrabPos(pygame.mouse.get_pos())
 
-                board.board[selectedPosition[0]][selectedPosition[1]].x = new[0]
-                board.board[selectedPosition[0]][selectedPosition[1]].y = new[1]
-                Old = board.board[selectedPosition[0]][selectedPosition[1]]
+                    board.board[selectedPosition[0]][selectedPosition[1]].x = new[0]
+                    board.board[selectedPosition[0]][selectedPosition[1]].y = new[1]
+                    Old = board.board[selectedPosition[0]][selectedPosition[1]]
 
-                board.board[selectedPosition[0]][selectedPosition[1]] = None
-                board.board[new[0]][new[1]] = Old
-                board.board[new[0]][new[1]].possibleMoves = []
-                if isinstance(board.board[new[0]][new[1]], Pieces.Pawn):
-                    if board.board[new[0]][new[1]].FirstMove:
-                        board.board[new[0]][new[1]].FirstMove = False
-                if currentSide == 'white':
-                    currentSide = 'black'
-                else:
-                    currentSide = 'white'
-                selected = False
-                selectedPosition = []
+                    board.board[selectedPosition[0]][selectedPosition[1]] = None
+                    board.board[new[0]][new[1]] = Old
+                    board.board[new[0]][new[1]].possibleMoves = []
+                    if isinstance(board.board[new[0]][new[1]], Pieces.Pawn):
+                        if board.board[new[0]][new[1]].FirstMove:
+                            board.board[new[0]][new[1]].FirstMove = False
+                    if currentSide == 'white':
+                        currentSide = 'black'
+                    else:
+                        currentSide = 'white'
+                    selected = False
+                    selectedPosition = []
     board.DrawBoard(win)
     board.drawPieces(win)
     board.DrawPossibleMoves(win,selectedPosition) 
