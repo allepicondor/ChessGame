@@ -7,10 +7,11 @@ class Pawn:
         self.board = board
         self.possibleMoves = []
         self.side = side
-        self.Image = pygame.image.load('PiecesImg/pawn.png')
+        self.Image = pygame.image.load('PiecesImg/Black/pawn.png')
+        self.FirstMove = True#ONLY FOR PAWNSSSSSS
         
         if side == 'white':
-            self.Image = pygame.image.load('PiecesImg/pawn.png')
+            self.Image = pygame.image.load('PiecesImg/Black/pawn.png')
         else:
             self.color = [0,0,0]
         self.Image = pygame.transform.scale(self.Image,(int(self.board.segment),int(self.board.segment)))
@@ -31,27 +32,34 @@ class Pawn:
         board = self.board.board
         x = self.x
         y = self.y
-        if self.side == "white":
+        if self.side == "black":
             try:
+                if self.FirstMove:
+                    if board[x][y+2] == None:
+                        self.possibleMoves.append([x,y+2])
                 if board[x][y+1] == None:
                     self.possibleMoves.append([x,y+1])
                 if board[x+1][y+1] != None:
-                    if board[x+1][y+1].side == "black":
+                    if board[x+1][y+1].side == "white":
                         self.possibleMoves.append([x+1,y+1])
                 if board[x-1][y+1] != None:
-                    if board[x-1][y+1].side == "black":
+                    if board[x-1][y+1].side == "white":
                         self.possibleMoves.append([x-1,y+1])
+                
             except IndexError:
                 pass
         else:
             try:
+                if self.FirstMove:
+                    if board[x][y-2] == None:
+                        self.possibleMoves.append([x,y-2])
                 if board[x][y-1] == None:
                     self.possibleMoves.append([x,y-1])
                 if board[x+1][y-1] != None:
-                    if board[x+1][y-1].side == "white":
+                    if board[x+1][y-1].side == "black":
                         self.possibleMoves.append([x+1,y-1])
                 if board[x-1][y-1] != None:
-                    if board[x-1][y-1].side == "white":
+                    if board[x-1][y-1].side == "black":
                         self.possibleMoves.append([x-1,y-1])
             except IndexError:
                 pass

@@ -8,7 +8,6 @@ board = Board(WIN_SIZE,8)
 win = pygame.display.set_mode((WIN_SIZE,WIN_SIZE))
 clock = pygame.time.Clock()
 board.reset_Board()
-print(board.board)
 currentSide = "white"
 selected = False
 selectedPosition = []
@@ -18,7 +17,6 @@ while True:
         if event.type == pygame.QUIT:
             break
     if pygame.mouse.get_pressed()[0]:
-        #print(board.GrabPos(pygame.mouse.get_pos()))
         if not selected:
             selectedPosition = board.GrabPos(pygame.mouse.get_pos())
             if board.board[selectedPosition[0]][selectedPosition[1]] != None:
@@ -35,12 +33,14 @@ while True:
 
                 board.board[selectedPosition[0]][selectedPosition[1]].x = new[0]
                 board.board[selectedPosition[0]][selectedPosition[1]].y = new[1]
-                #print(board.board[selectedPosition[0]][selectedPosition[1]].x,board.board[selectedPosition[0]][selectedPosition[1]].y)
                 Old = board.board[selectedPosition[0]][selectedPosition[1]]
 
                 board.board[selectedPosition[0]][selectedPosition[1]] = None
                 board.board[new[0]][new[1]] = Old
                 board.board[new[0]][new[1]].possibleMoves = []
+                if isinstance(board.board[new[0]][new[1]], Pieces.Pawn):
+                    if board.board[new[0]][new[1]].FirstMove:
+                        board.board[new[0]][new[1]].FirstMove = False
                 if currentSide == 'white':
                     currentSide = 'black'
                 else:
