@@ -7,15 +7,17 @@ class Pawn:
         self.board = board
         self.possibleMoves = []
         self.side = side
+        self.Image = pygame.image.load('PiecesImg/pawn.png')
+        
         if side == 'white':
-            self.color = [150,150,150]
+            self.Image = pygame.image.load('PiecesImg/pawn.png')
         else:
             self.color = [0,0,0]
+        self.Image = pygame.transform.scale(self.Image,(int(self.board.segment),int(self.board.segment)))
     def draw(self,win):
         pos = self.board.GrabPixel([self.x,self.y])
-        pos[0] += int(self.board.segment/2)
-        pos[1] += int(self.board.segment/2)
-        pygame.draw.circle(win,self.color, pos, int(self.board.segment/2)-10)
+        win.blit(self.Image, (pos[0]-1,pos[1]-2))
+        
         
     def drawPossibleMoves(self,win):
         for move in self.possibleMoves:
