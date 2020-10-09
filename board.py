@@ -24,8 +24,8 @@ class Board:
             return True
         return False
     def reset_Board(self):
-        self.board[4][7] = Pieces.Rook(4,7,[150,150,150],"white",self)
-        self.board[4][2] = Pieces.Pawn(4,2,[0,0,0],"black",self)
+        self.board[3][3] = Pieces.Rook(3,3,"white",self)
+        self.board[4][2] = Pieces.Pawn(4,2,"black",self)
     def DrawPossibleMoves(self,win,selectedPiece):
         if selectedPiece != []:
             print()

@@ -1,13 +1,16 @@
 import pygame
 
 class Pawn:
-    def __init__(self,x,y,color,side,board):
+    def __init__(self,x,y,side,board):
         self.x = x
         self.y = y
         self.board = board
         self.possibleMoves = []
         self.side = side
-        self.color = color
+        if side == 'white':
+            self.color = [150,150,150]
+        else:
+            self.color = [0,0,0]
     def draw(self,win):
         pos = self.board.GrabPixel([self.x,self.y])
         pos[0] += int(self.board.segment/2)
@@ -51,13 +54,16 @@ class Pawn:
             except IndexError:
                 pass
 class Rook:
-    def __init__(self,x,y,color,side,board):
+    def __init__(self,x,y,side,board):
         self.x = x
         self.y = y
         self.board = board
         self.possibleMoves = []
         self.side = side
-        self.color = color
+        if side == 'white':
+            self.color = [150,150,150]
+        else:
+            self.color = [0,0,0]
     def draw(self,win):
         pos = self.board.GrabPixel([self.x,self.y])
         pos[0] += int(self.board.segment/2)
