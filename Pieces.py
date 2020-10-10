@@ -32,9 +32,6 @@ class Pawn:
         y = self.y
         if self.side == "black":
             try:
-                if self.FirstMove:
-                    if board[x][y+2] == None:
-                        self.possibleMoves.append([x,y+2])
                 if board[x][y+1] == None:
                     self.possibleMoves.append([x,y+1])
                 if board[x+1][y+1] != None:
@@ -43,6 +40,9 @@ class Pawn:
                 if board[x-1][y+1] != None:
                     if board[x-1][y+1].side == "white":
                         self.possibleMoves.append([x-1,y+1])
+                if self.FirstMove:
+                    if board[x][y+2] == None:
+                        self.possibleMoves.append([x,y+2])
                 
             except IndexError:
                 pass
@@ -90,20 +90,65 @@ class Rook:
         board = self.board.board
         x = self.x
         y = self.y
-        #UP
-        up = 1
-        while True:
-            CheckingPosition = board[x][y-up]
-            if CheckingPosition != None:
-                if CheckingPosition.side != self.side:
-                    self.possibleMoves.append([x,y-up])
-                    break
+        try:
+            #UP
+            up = 1
+            while True:
+                CheckingPosition = board[x][y-up]
+                if CheckingPosition != None:
+                    if CheckingPosition.side != self.side:
+                        self.possibleMoves.append([x,y-up])
+                        break
+                    else:
+                        self.possibleMoves.append([x,y-(up-1)])
+                        break
                 else:
-                    self.possibleMoves.append([x,y-(up-1)])
-                    break
-            else:
-                self.possibleMoves.append([x,y-up])
-            up += 1
+                    self.possibleMoves.append([x,y-up])
+                up += 1
+            #DOWN
+            down = 1
+            while True:
+                CheckingPosition = board[x][y+down]
+                if CheckingPosition != None:
+                    if CheckingPosition.side !=self.side:
+                        self.possibleMoves.append([x,y+down])
+                        break
+                    else:
+                        self.possibleMoves.append([x,y+(down+1)])
+                        break
+                else:
+                    self.possibleMoves.append([x,y+down])
+                down += 1
+            #LEFT
+            left = 1
+            while True:
+                CheckingPosition = board[x-left][y]
+                if CheckingPosition.side != None:
+                    if CheckingPosition.side !=self.side:
+                        self.possibleMoves.append([x-left,y])
+                        break
+                    else:
+                        self.possibleMoves.append([x-(left-1),y])
+                        break
+                else:
+                    self.possibleMoves.append([x-left,y])
+                left += 1
+            #RIGHT
+            right = 1
+            while True:
+                CheckingPosition = board[x+right][y]
+                if CheckingPosition.side != None:
+                    if CheckingPosition.side !=self.side:
+                        self.possibleMoves.append([x+right,y])
+                        break
+                    else:
+                        self.possibleMoves.append([x+(right+1),y])
+                        break
+                else:
+                    self.possibleMoves.append([x+right,y])
+                right += 1
+        except IndexError:
+            pass
 class King:
     def __init__(self,x,y,side,board):
         self.x = x

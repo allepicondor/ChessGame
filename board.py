@@ -28,15 +28,14 @@ class Board:
 
 
     def reset_Board(self):#Starting Piece Position
-        self.board[3][6] = Pieces.Pawn(3,6,"white",self)
-        self.board[5][6] = Pieces.Pawn(5,6,"black",self)
+        self.board[3][6] = Pieces.Rook(3,6,"white",self)
+        self.board[5][6] = Pieces.Pawn(5,6,"white",self)
 
 
 
 
     def DrawPossibleMoves(self,win,selectedPiece):
         if selectedPiece != []:
-            print()
             self.board[selectedPiece[0]][selectedPiece[1]].drawPossibleMoves(win)
 
     def drawPieces(self,win):
@@ -55,6 +54,6 @@ class Board:
                 else:
                     if y % 2 == 1:
                         color = [235,236,208]
-                pygame.draw.rect(win, color, [DrawPos[0],DrawPos[1], self.segment,self.segment])
+                pygame.draw.rect(win, color, [DrawPos[0],DrawPos[1], self.segment+1,self.segment+1])
 
 

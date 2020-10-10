@@ -2,7 +2,7 @@ import numpy as np
 import pygame
 import Pieces
 from board import Board
-WIN_SIZE = 600
+WIN_SIZE = 900
 
 board = Board(WIN_SIZE,8)
 win = pygame.display.set_mode((WIN_SIZE,WIN_SIZE))
