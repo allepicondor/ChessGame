@@ -414,6 +414,167 @@ class Knight:
                         self.possibleMoves.append([x-2,y+1])
                 else:
                     self.possibleMoves.append([x-2,y+1])
-
-
+class Queen:
+    def __init__(self,x,y,side,board):
+        self.x = x
+        self.y = y
+        self.board = board
+        self.possibleMoves = []
+        self.side = side
+        self.Image = pygame.image.load('PiecesImg/Black/Queen.png')
+        if side == 'white':
+            self.Image = pygame.image.load('PiecesImg/White/Queen.png')
+        self.Image = pygame.transform.scale(self.Image,(int(self.board.segment),int(self.board.segment)))
+    def draw(self,win):
+        pos = self.board.GrabPixel([self.x,self.y])
+        win.blit(self.Image, (pos[0]-1,pos[1]-2))
+        
+    def drawPossibleMoves(self,win):
+        for move in self.possibleMoves:
+            pos = self.board.GrabPixel([move[0],move[1]])
+            pos[0] += int(self.board.segment/2)
+            pos[1] += int(self.board.segment/2)
+            pygame.draw.circle(win,[0,255,0], pos, int(10))
+    def PossibleMoves(self,board):
+        self.possibleMoves = []
+        self.board = board
+        board = self.board.board
+        x = self.x
+        y = self.y
+        #UP
+        up = 1
+        while True:
+            if not (y-up < 0):
+                CheckingPosition = board[x][y-up]
+                if CheckingPosition != None:
+                    if CheckingPosition.side != self.side:
+                        self.possibleMoves.append([x,y-up])
+                        break
+                    else:
+                        break
+                else:
+                    self.possibleMoves.append([x,y-up])
+                up += 1
+            else:
+                break
+        #UP RIGHT
+        up = 1
+        right = 1
+        while True:
+            if not (y-up < 0 or x+right >= self.board.BoardSize):
+                CheckingPosition = board[x+right][y-up]
+                if CheckingPosition != None:
+                    if CheckingPosition.side != self.side:
+                        self.possibleMoves.append([x+right,y-up])
+                        break
+                    else:
+                        break
+                else:
+                    self.possibleMoves.append([x+right,y-up])
+                up += 1
+                right += 1
+            else:
+                break
+        #RIGHT
+        right = 1
+        while True:
+            if not (x+right >= self.board.BoardSize):
+                CheckingPosition = board[x+right][y]
+                if CheckingPosition != None:
+                    if CheckingPosition.side != self.side:
+                        self.possibleMoves.append([x+right,y])
+                        break
+                    else:
+                        break
+                else:
+                    self.possibleMoves.append([x+right,y])
+                right += 1
+            else:
+                break
+        #DOWN RIGHT
+        right = 1
+        down = 1
+        while True:
+            if not (x+right >= self.board.BoardSize or y+down >= self.board.BoardSize):
+                CheckingPosition = board[x+right][y+down]
+                if CheckingPosition != None:
+                    if CheckingPosition.side != self.side:
+                        self.possibleMoves.append([x+right,y+down])
+                        break
+                    else:
+                        break
+                else:
+                    self.possibleMoves.append([x+right,y+down])
+                right += 1
+                down += 1
+            else:
+                break
+        #DOWN
+        down = 1
+        while True:
+            if not (y+down >= self.board.BoardSize):
+                CheckingPosition = board[x][y+down]
+                if CheckingPosition != None:
+                    if CheckingPosition.side != self.side:
+                        self.possibleMoves.append([x,y+down])
+                        break
+                    else:
+                        break
+                else:
+                    self.possibleMoves.append([x,y+down])
+                down += 1
+            else:
+                break
+        #DOWN LEFT
+        down = 1
+        left = 1
+        while True:
+            if not (y+down >= self.board.BoardSize or x-left < 0):
+                CheckingPosition = board[x-left][y+down]
+                if CheckingPosition != None:
+                    if CheckingPosition.side != self.side:
+                        self.possibleMoves.append([x-left,y+down])
+                        break
+                    else:
+                        break
+                else:
+                    self.possibleMoves.append([x-left,y+down])
+                down += 1
+                left += 1
+            else:
+                break
+        #LEFT
+        left = 1
+        while True:
+            if not (x-left < 0):
+                CheckingPosition = board[x-left][y]
+                if CheckingPosition != None:
+                    if CheckingPosition.side != self.side:
+                        self.possibleMoves.append([x-left,y])
+                        break
+                    else:
+                        break
+                else:
+                    self.possibleMoves.append([x-left,y])
+                left += 1
+            else:
+                break
+        #UP LEFT
+        up = 1
+        left = 1
+        while True:
+            if not (x-left < 0 or y-up < 0):
+                CheckingPosition = board[x-left][y-up]
+                if CheckingPosition != None:
+                    if CheckingPosition.side != self.side:
+                        self.possibleMoves.append([x-left,y-up])
+                        break
+                    else:
+                        break
+                else:
+                    self.possibleMoves.append([x-left,y-up])
+                up += 1
+                left += 1
+            else:
+                break
 

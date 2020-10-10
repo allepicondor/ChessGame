@@ -44,6 +44,9 @@ class Board:
         self.board[1][0] = Pieces.Knight(1,0,"black",self)
         self.board[6][7] = Pieces.Knight(6,7,"white",self)
         self.board[1][7] = Pieces.Knight(1,7,"white",self)
+        self.board[3][7] = Pieces.Queen(3,7,"white",self)
+        self.board[4][0] = Pieces.Queen(4,0,"black",self)
+        self.board[3][3] = Pieces.King(3,3,"white",self)
     def DrawPossibleMoves(self,win,selectedPiece):
         if selectedPiece != []:
             self.board[selectedPiece[0]][selectedPiece[1]].drawPossibleMoves(win)
