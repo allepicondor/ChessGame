@@ -89,10 +89,10 @@ class Rook:
         board = self.board.board
         x = self.x
         y = self.y
-        try:
-            #UP
-            up = 1
-            while True:
+        #UP
+        up = 1
+        while True:
+            if not (y-up < 0):
                 CheckingPosition = board[x][y-up]
                 if CheckingPosition != None:
                     if CheckingPosition.side != self.side:
@@ -103,12 +103,12 @@ class Rook:
                 else:
                     self.possibleMoves.append([x,y-up])
                 up += 1
-        except IndexError as error:
-            pass
-        try:
-            #DOWN
-            down = 1
-            while True:
+            else:
+                break
+        #DOWN
+        down = 1
+        while True:
+            if not (y+down >= self.board.BoardSize):
                 CheckingPosition = board[x][y+down]
                 if CheckingPosition != None:
                     if CheckingPosition.side != self.side:
@@ -119,12 +119,12 @@ class Rook:
                 else:
                     self.possibleMoves.append([x,y+down])
                 down += 1
-        except IndexError as error:
-            pass
-        try:
-            #LEFT
-            left = 1
-            while True:
+            else:
+                break
+        #LEFT
+        left = 1
+        while True:
+            if not (x-left < 0):
                 CheckingPosition = board[x-left][y]
                 if CheckingPosition != None:
                     if CheckingPosition.side !=self.side:
@@ -135,12 +135,12 @@ class Rook:
                 else:
                     self.possibleMoves.append([x-left,y])
                 left += 1
-        except IndexError as error:
-            pass
-        try:
-            #RIGHT
-            right = 1
-            while True:
+            else:
+                break
+        #RIGHT
+        right = 1
+        while True:
+            if not (x+right >= self.board.BoardSize):
                 CheckingPosition = board[x+right][y]
                 if CheckingPosition != None:
                     if CheckingPosition.side !=self.side:
@@ -151,8 +151,8 @@ class Rook:
                 else:
                     self.possibleMoves.append([x+right,y])
                 right += 1
-        except IndexError as error:
-            pass
+            else:
+                break
 class King:
     def __init__(self,x,y,side,board):
         self.x = x
@@ -259,11 +259,11 @@ class Bishop:
         board = self.board.board
         x = self.x
         y = self.y
-        try:
-            #RIGHT UP
-            up = 1
-            right = 1
-            while True:
+        #RIGHT UP
+        up = 1
+        right = 1
+        while True:
+            if not (x+right >= self.board.BoardSize or y-up < 0):
                 CheckingPosition = board[x+right][y-up]
                 if CheckingPosition != None:
                     if CheckingPosition.side != self.side:
@@ -275,13 +275,13 @@ class Bishop:
                     self.possibleMoves.append([x+right,y-up])
                 up += 1
                 right += 1
-        except IndexError as error:
-            pass
-        try:
-            #RIGHT DOWN
-            down = 1
-            right = 1
-            while True:
+            else:
+                break
+        #RIGHT DOWN
+        down = 1
+        right = 1
+        while True:
+            if not (x+right >= self.board.BoardSize or y+down >= self.board.BoardSize):
                 CheckingPosition = board[x+right][y+down]
                 if CheckingPosition != None:
                     if CheckingPosition.side != self.side:
@@ -293,13 +293,13 @@ class Bishop:
                     self.possibleMoves.append([x+right,y+down])
                 down += 1
                 right += 1
-        except IndexError as error:
-            pass
-        try:
-            #LEFT UP
-            left = 1
-            up = 1
-            while True:
+            else:
+                break
+        #LEFT UP
+        left = 1
+        up = 1
+        while True:
+            if not (x-left < 0 or y-up < 0):
                 CheckingPosition = board[x-left][y-up]
                 if CheckingPosition != None:
                     if CheckingPosition.side !=self.side:
@@ -311,13 +311,13 @@ class Bishop:
                     self.possibleMoves.append([x-left,y-up])
                 left += 1
                 up += 1
-        except IndexError as error:
-            pass
-        try:
-            #LEFT DOWN
-            left = 1
-            down = 1
-            while True:
+            else:
+                break
+        #LEFT DOWN
+        left = 1
+        down = 1
+        while True:
+            if not (x-left < 0 or y+down >= self.board.BoardSize):
                 CheckingPosition = board[x-left][y+down]
                 if CheckingPosition != None:
                     if CheckingPosition.side !=self.side:
@@ -329,8 +329,8 @@ class Bishop:
                     self.possibleMoves.append([x-left,y+down])
                 left += 1
                 down += 1
-        except IndexError as error:
-            pass
+            else:
+                break
 class Knight:
     def __init__(self,x,y,side,board):
         self.x = x
