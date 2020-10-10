@@ -7,6 +7,7 @@ class Board:
         self.Sizey = Size
         self.segment = Size/BoardSize
         self.BoardSize = BoardSize
+        self.posurt = []
 
         self.board = np.ndarray((BoardSize,BoardSize),dtype=np.object)
 
@@ -28,12 +29,21 @@ class Board:
 
 
     def reset_Board(self):#Starting Piece Position
-        self.board[3][6] = Pieces.Rook(3,6,"white",self)
-        self.board[5][6] = Pieces.Pawn(5,6,"white",self)
-
-
-
-
+        for x in range(self.BoardSize):
+            self.board[x][1] = Pieces.Pawn(x,1,"black",self)
+            self.board[x][6] = Pieces.Pawn(x,6,"white",self)
+        self.board[7][7] = Pieces.Rook(7,7,"white",self)
+        self.board[0][7] = Pieces.Rook(0,7,"white",self)
+        self.board[7][0] = Pieces.Rook(7,0,"black",self)
+        self.board[0][0] = Pieces.Rook(0,0,"black",self)
+        self.board[2][7] = Pieces.Bishop(2,7,"white",self)
+        self.board[5][7] = Pieces.Bishop(5,7,"white",self)
+        self.board[2][0] = Pieces.Bishop(2,0,"black",self)
+        self.board[5][0] = Pieces.Bishop(5,0,"black",self)
+        self.board[6][0] = Pieces.Knight(6,0,"black",self)
+        self.board[1][0] = Pieces.Knight(1,0,"black",self)
+        self.board[6][7] = Pieces.Knight(6,7,"white",self)
+        self.board[1][7] = Pieces.Knight(1,7,"white",self)
     def DrawPossibleMoves(self,win,selectedPiece):
         if selectedPiece != []:
             self.board[selectedPiece[0]][selectedPiece[1]].drawPossibleMoves(win)
